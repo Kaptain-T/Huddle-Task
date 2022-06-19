@@ -36,22 +36,53 @@ li {
     border: none;
     
 }
-.try {
+
+.try, .logo {
     cursor: pointer;
 }
 .btn:hover, .btn:focus{
     cursor: pointer;
     background-color: hsl(322, 93%, 72%);
-    border: none;
+}
+@keyframes slidein{
+    0%{
+        transform: translate(-100px, 100px);
+    }
+    50%{
+        transform: translate(100px,-100px);
+    }
+    100%{
+        transform: translate(0);
+    }
 }
 .logo {
     width: 240px;
     height: 39px;
     padding-left: 40px;
+    animation: slidein 2s ease-in-out;
+    animation-iteration-count: 1;
+    animation-delay: .2s;
+    
 }
+
+@keyframes logoroll {
+    0%{
+        transform: rotate(-20deg);
+    }
+    50%{
+        /* transform:translate(20px, 20px); */
+        transform: rotate(10deg);
+    }
+}
+.trypouch:hover{
+    animation: logoroll 1s;  
+}
+
+
+
 /* HEADER */
 header {
-    background: url(bg-hero-desktop.svg);
+    background: url(bg-hero-desktop.svg) var(--Very-Pale-Cyan);
 }
 nav ul {
     display: flex;
@@ -66,8 +97,9 @@ nav ul {
     border-radius: 20px;
     box-shadow: 0 2px 7px var(--Grayish-Blue);
 }
-.try:hover, .try:active {
+.try:hover, .try:active, .try:focus {
     color: var(--Grayish-Blue);
+    outline: 1px solid var(--Grayish-Blue);
 }
 
 /* MAIN BLOCK (SORT OF PART OF HEADER) */
@@ -106,7 +138,12 @@ main > .flexbox {
     margin-bottom: 200px;
 
 }
-
+.switch1 {
+    display: block;
+}
+.switch2 {
+    display: none;
+}
 .sectionette {
     border-radius: 10px;
     box-shadow: 0 0 5px var(--Grayish-Blue);
@@ -135,7 +172,12 @@ main > .flexbox {
 .innerbox {
     margin-left: 60px;
 }
-
+#switch1a, #switch2a {
+    display: block;
+}
+#switch1b, #switch2b {
+    display: none;
+}
 /* CALL TO ACTION */
 .C2A-container {
     background-color: white;
@@ -161,10 +203,13 @@ main > .flexbox {
     font-size: 1.25rem;
     font-weight: bold;
     color: white;
-    border: none;
-    
+    border: none;  
 }
 
+.btn-C2A:hover{
+    transform: scale(0.9);
+    transition: .5s;
+}
 footer{
     margin-top: 400px;
     padding: 200px 50px 100px 50px;
@@ -175,6 +220,7 @@ footer{
     gap: 50px;
     font-size: 1rem;
 }
+
 .footerboxcontainer {
     display: flex;
     justify-content: space-between;
@@ -186,6 +232,7 @@ footer{
     margin: 40px;
     margin-top: 0;
 }
+
 .lastfooterbox p{
     margin: 40px;
     margin-top: 0;
@@ -195,9 +242,11 @@ footer{
     padding-bottom: 20px;
 }
 
-.footerbox ul li:hover{
+.footerbox ul li:hover, .footerbox ul a:focus{
     text-decoration: underline;
     cursor: pointer;
+    outline: none;
+    border: none;
 }
 .innerbox2 {
     padding-left: 40px;
@@ -206,7 +255,25 @@ footer{
 .innerbox2 img:hover, .innerbox2 img:focus, .innerbox2 img:active{
     fill: var(--Pink);
 }
-@media screen and (max-width:400px) {
+
+@media screen and (max-width:1200px) {
+    .sectionette{
+        width: fit-content;
+    }
+
+    .box2 img{
+        margin: auto;
+    }
+
+    #switch1a, #switch2a {
+        display: block;
+    }
+    #switch1b, #switch2b {
+        display: none;
+    }
+}
+
+@media screen and (max-width:768px) {
     header {
         background-image: url(bg-hero-mobile.svg);
     }
@@ -234,18 +301,25 @@ footer{
         margin: 0;
     
     }
+    #switch1b, #switch2b {
+        display: block;
+    }
+    #switch1a, #switch2a {
+        display: none;
+    }
+    
     .sectionette {
         flex-direction: column;
-        height: 80vh;
+        height: fit-content;
         margin: 0 auto;
         padding: 10px;
         gap: 0;
         width: 95%;
         text-align: center;
     }
-    
+
     .box1, .box2 {
-        flex: 100%;
+        flex: 50%;
         padding: 0;
     }
     .innerbox {
@@ -255,17 +329,18 @@ footer{
         margin: auto;
     }
     .box2 {
-        margin: 0;
+        margin: auto;
         padding: 0;
     }
     .box2 img{
         width: 100%;
+        max-width: 300px;
         margin: 5px;
         padding: 0;
         
     }
     footer{
-        margin: 200px 0;
+        margin: 150px 0 0 0;
         padding: 200px 0 100px 0;
     }
     .footerboxcontainer {
@@ -325,4 +400,5 @@ footer{
         width: fit-content;
         margin: 0 auto;
     }
+
 }
